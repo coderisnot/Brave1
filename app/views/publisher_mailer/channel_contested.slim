@@ -1,0 +1,11 @@
+/ Sent as soon as a second publisher verifies a channel, placing it in a contested state
+- content_for(:title) do
+  h3= t ".title"
+
+p.salutation= t "publisher_mailer.shared.salutation", name: @publisher_name
+
+p= t ".intro", channel_name: @channel_name, name: @publisher_name
+
+div.btn-container= link_to(t(".button"), @transfer_url, class: "btn-primary btn-login")
+
+.notice= t "shared.support_note_html"

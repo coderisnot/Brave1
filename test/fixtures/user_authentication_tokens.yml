@@ -1,0 +1,22 @@
+default_user_authentication_token: &default_user_authentication_token
+  authentication_token_expires_at: "<%= DateTime.now + PublisherTokenGenerator::TOKEN_TTL %>"
+  # authenticity_token run through console with
+  # UserAuthenticationToken.attribute_types["authentication_token"].serialize("authentication_token")
+  authentication_token: "{\"p\":\"2eXOx53fs0/AzeJdmiPPuVAR+PE=\",\"h\":{\"iv\":\"tTfjtUUCwZGPE9mu\",\"at\":\"DBlolp810/sk8qxfmqHiQg==\"}}"
+  user: default
+
+completed_user_authentication_token:
+  <<: *default_user_authentication_token
+  user: completed
+
+uphold_connected_currency_unconfirmed_user_authentication_token:
+  <<: *default_user_authentication_token
+  user: uphold_connected_currency_unconfirmed
+
+uphold_connected_user_authentication_token:
+  <<: *default_user_authentication_token
+  user: uphold_connected
+
+verified_user_authentication_token:
+  <<: *default_user_authentication_token
+  user: verified

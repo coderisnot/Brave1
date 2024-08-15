@@ -1,0 +1,9 @@
+test_promo_campaign:
+  name: test campaign
+  partner: default_partner
+
+test_promo_campaign2:
+  name: test campaign2
+
+peer_to_peer_campaign:
+  name: "peer_to_peer"

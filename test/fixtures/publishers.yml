@@ -1,0 +1,414 @@
+<% salt = SecureRandom.random_bytes(12) %>
+
+# Just registered.
+default: &default
+  email: "alice@default.org"
+  role: "<%= Publisher::PUBLISHER %>"
+  name: "Alice the Pyramid"
+  default_site_banner_id: "00000000-0000-0000-0000-000000000000"
+  two_factor_prompted_at: "<%= 1.day.ago %>"
+  agreed_to_tos: "<%= 1.day.ago %>"
+  last_sign_in_ip: "192.168.1.1"
+  current_sign_in_ip: "192.168.1.1"
+  feature_flags: <%= { UserFeatureFlags::GEMINI_ENABLED => true, UserFeatureFlags::P2P_ENABLED => true }.to_json %>
+
+verified:
+  <<: *default
+  default_site_banner_id: "00000000-0000-0000-0000-000000000005"
+  default_site_banner_mode: true
+  email: "alice@verified.org"
+  name: "Alice the Verified"
+  selected_wallet_provider: verified_connection (UpholdConnection)
+
+verified_blocked_country:
+  <<: *default
+  default_site_banner_id: "00000000-0000-0000-0000-000000000009"
+  default_site_banner_mode: true
+  email: "vn@verified.org"
+  name: "Vn the Verified"
+  selected_wallet_provider: verified_blocked_country_connection (UpholdConnection)
+
+verified_blocked_country_gemini:
+  <<: *default
+  default_site_banner_id: "00000000-0000-0000-0000-00000000019"
+  default_site_banner_mode: true
+  email: "AQ@verified.org"
+  name: "AQ the Verified"
+  selected_wallet_provider: gemini_blocked_country_connection (GeminiConnection)
+
+notes:
+  <<: *default
+  email: "alice@notes.org"
+  name: "Alice the Notes"
+
+just_notes:
+  <<: *default
+  email: "only@notes.org"
+  name: "Only the Notes"
+  role: 'admin'
+
+verified_totp_only:
+  <<: *default
+  email: "alice_totp@verified.org"
+  name: "Alice the Verified TOTP User"
+
+verified_with_blocked_country_exception:
+  <<: *default
+  default_site_banner_id: "00000000-0000-0000-0000-000000000029"
+  default_site_banner_mode: true
+  email: "DJ@verified.org"
+  name: "DJ the Verified"
+  blocked_country_exception: true
+  selected_wallet_provider: verified_blocked_country_exemption_connection (UpholdConnection)
+
+browser_user:
+  role: "<%= Publisher::BROWSER_USER %>"
+
+# A publisher that has received an authentication email
+completed:
+  email: "alice@completed.org"
+  name: "Alice the Completed"
+  two_factor_prompted_at: "<%= 1.day.ago %>"
+  agreed_to_tos: "<%= 1.day.ago %>"
+  default_currency_confirmed_at: "<%= DateTime.now %>"
+  subscribed_to_marketing_emails: true
+  selected_wallet_provider: unconnected (UpholdConnection)
+
+top_referrer:
+  email: "top_referrer@hello.org"
+  name: "Uphold Top Referrer Completed"
+  two_factor_prompted_at: "<%= 1.day.ago %>"
+  agreed_to_tos: "<%= 1.day.ago %>"
+  default_currency_confirmed_at: "<%= DateTime.now %>"
+  subscribed_to_marketing_emails: true
+  selected_wallet_provider: top_referrer_connected (UpholdConnection)
+  feature_flags: <%= { UserFeatureFlags::REFERRAL_ENABLED_OVERRIDE => true }.to_json %>
+
+top_referrer_gemini:
+  email: "top_referrer_gemini@hello.org"
+  name: "Gemini Top Referrer Completed"
+  two_factor_prompted_at: "<%= 1.day.ago %>"
+  agreed_to_tos: "<%= 1.day.ago %>"
+  default_currency_confirmed_at: "<%= DateTime.now %>"
+  subscribed_to_marketing_emails: true
+  selected_wallet_provider: top_referrer_gemini_connected (GeminiConnection)
+  feature_flags: <%= { UserFeatureFlags::REFERRAL_ENABLED_OVERRIDE => true,  UserFeatureFlags::GEMINI_ENABLED => true }.to_json %>
+
+top_referrer_bitflyer:
+  name: "Bitflyer Top Referrer Completed"
+  email: "top_referrer_bitflyer@hello.org"
+  two_factor_prompted_at: "<%= 1.day.ago %>"
+  agreed_to_tos: "<%= 1.day.ago %>"
+  default_currency_confirmed_at: "<%= DateTime.now %>"
+  subscribed_to_marketing_emails: true
+  selected_wallet_provider: top_referrer_bitflyer_connected (BitflyerConnection)
+  feature_flags: <%= { UserFeatureFlags::REFERRAL_ENABLED_OVERRIDE => false }.to_json %>
+
+bitflyer_two:
+  name: "Bitflyer Two Completed"
+  email: "bitflyer_two@hello.org"
+  two_factor_prompted_at: "<%= 1.day.ago %>"
+  agreed_to_tos: "<%= 1.day.ago %>"
+  default_currency_confirmed_at: "<%= DateTime.now %>"
+  subscribed_to_marketing_emails: true
+  selected_wallet_provider: bitflyer_two_connected (BitflyerConnection)
+  feature_flags: <%= { UserFeatureFlags::REFERRAL_ENABLED_OVERRIDE => true }.to_json %>
+
+gemini_completed:
+  email: "gemini@completed.org"
+  name: "Gemini the Completed"
+  two_factor_prompted_at: "<%= 1.day.ago %>"
+  agreed_to_tos: "<%= 1.day.ago %>"
+  default_currency_confirmed_at: "<%= DateTime.now %>"
+  subscribed_to_marketing_emails: true
+  selected_wallet_provider: connection_with_token (GeminiConnection)
+
+gemini_in_japan:
+  email: "gemini_in_japan@completed.org"
+  name: "Gemini in Japan"
+  two_factor_prompted_at: "<%= 1.day.ago %>"
+  agreed_to_tos: "<%= 1.day.ago %>"
+  default_currency_confirmed_at: "<%= DateTime.now %>"
+  subscribed_to_marketing_emails: true
+  selected_wallet_provider: gemini_in_japan_connection (GeminiConnection)
+
+gemini_not_completed:
+  email: "gemini_not@completed.org"
+  name: "Gemini the Completed"
+  two_factor_prompted_at: "<%= 1.day.ago %>"
+  agreed_to_tos: "<%= 1.day.ago %>"
+  default_currency_confirmed_at: "<%= DateTime.now %>"
+  subscribed_to_marketing_emails: true
+
+gemini_suspended:
+  email: "gemini_suspended@completed.org"
+  name: "Gemini the Completed"
+  two_factor_prompted_at: "<%= 1.day.ago %>"
+  agreed_to_tos: "<%= 1.day.ago %>"
+  default_currency_confirmed_at: "<%= DateTime.now %>"
+  subscribed_to_marketing_emails: true
+
+uphold_in_japan:
+  email: "uphold_in_japan@completed.org"
+  name: "Uphold in Japan"
+  two_factor_prompted_at: "<%= 1.day.ago %>"
+  agreed_to_tos: "<%= 1.day.ago %>"
+  default_currency_confirmed_at: "<%= DateTime.now %>"
+  subscribed_to_marketing_emails: true
+  selected_wallet_provider: uphold_in_japan_connection (UpholdConnection)
+
+completed_partner:
+  email: "partner@completed.org"
+  name: "Paul the Partner"
+  role: 'partner'
+  two_factor_prompted_at: "<%= 1.day.ago %>"
+  agreed_to_tos: "<%= 1.day.ago %>"
+  created_by: admin
+  default_currency: "USD"
+  default_currency_confirmed_at: "<%= DateTime.now %>"
+
+suspended_partner:
+  email: "suspended_partner@completed.org"
+  name: "Suspended"
+  role: 'partner'
+  two_factor_prompted_at: "<%= 1.day.ago %>"
+  created_by: admin
+  agreed_to_tos: "<%= 1.day.ago %>"
+  default_currency_confirmed_at: "<%= DateTime.now %>"
+
+admin:
+  email: "hello@brave.com"
+  role: "admin"
+  name: Mr. Admin
+  two_factor_prompted_at: "<%= 1.day.ago %>"
+
+zendesk_admin:
+  email: <%= Rails.configuration.pub_secrets[:zendesk_admin_email] %>
+  role: "admin"
+  two_factor_prompted_at: "<%= 1.day.ago %>"
+
+zendesk_end_user:
+  email: <%= Rails.configuration.pub_secrets[:zendesk_end_user_email] %>
+  role: "publisher"
+
+partner:
+  email: "partner@brave.com"
+  role: "partner"
+  two_factor_prompted_at: "<%= 1.day.ago %>"
+
+unprompted:
+  email: "alice@unprompted.org"
+  name: "Alice the Unprompted"
+  agreed_to_tos: "<%= 1.day.ago %>"
+
+stale:
+  email: "alice@stale.org"
+  name: "Alice the Stale"
+  agreed_to_tos: "<%= 1.day.ago %>"
+
+fake1:
+  email: "alice@fake.org"
+  name: "Fake Alice"
+  agreed_to_tos: "<%= 1.day.ago %>"
+
+fake2:
+  email: "bob@fake.org"
+  name: "Fake Bob"
+  agreed_to_tos: "<%= 1.day.ago %>"
+
+stats:
+  email: "test@stats.org"
+  name: "Stats Test"
+  agreed_to_tos: "<%= 1.day.ago %>"
+
+uphold_connected:
+  email: "alice@upholdconnected.org"
+  name: "Alice the uphold_connected"
+  agreed_to_tos: "<%= 1.day.ago %>"
+  two_factor_prompted_at: "<%= 1.day.ago %>"
+  default_currency_confirmed_at: "<%= 1.day.ago %>"
+  selected_wallet_provider: basic_connection (UpholdConnection)
+
+uphold_connected_reauthorize:
+  email: "alice_reauthorize@upholdconnected.org"
+  name: "Alice the uphold_connected"
+  agreed_to_tos: "<%= 1.day.ago %>"
+  two_factor_prompted_at: "<%= 1.day.ago %>"
+  default_currency_confirmed_at: "<%= 1.day.ago %>"
+
+uphold_connected_details:
+  email: "alice@upholdconnecteddetails.org"
+  name: "Alice the uphold_connected"
+  agreed_to_tos: "<%= 1.day.ago %>"
+  two_factor_prompted_at: "<%= 1.day.ago %>"
+  default_currency_confirmed_at: "<%= 1.day.ago %>"
+  selected_wallet_provider: details_connection (UpholdConnection)
+
+uphold_connected_blocked:
+  email: "alice@upholdconnectedandblocked.org"
+  name: "Alice the uphold_connected"
+  agreed_to_tos: "<%= 1.day.ago %>"
+  two_factor_prompted_at: "<%= 1.day.ago %>"
+  default_currency_confirmed_at: "<%= 1.day.ago %>"
+
+uphold_connected_restricted_member:
+  email: "restricted@upholdconnected.org"
+  name: "restricted the uphold_connected"
+  agreed_to_tos: "<%= 1.day.ago %>"
+  two_factor_prompted_at: "<%= 1.day.ago %>"
+  default_currency_confirmed_at: "<%= 1.day.ago %>"
+
+uphold_connected_currency_unconfirmed:
+  email: "carol@upholdconnected.org"
+  name: "Carol the unconfirmed currency"
+  agreed_to_tos: "<%= 1.day.ago %>"
+  two_factor_prompted_at: "<%= 1.day.ago %>"
+  selected_wallet_provider: verified_no_currency (UpholdConnection)
+
+youtube_initial:
+  email: "alice@spud.com"
+  name: "Alice the Youtuber"
+  agreed_to_tos: "<%= 1.day.ago %>"
+
+youtube_new:
+  email: "alice2@spud.com"
+  name: "Alice the Youtuber"
+  agreed_to_tos: "<%= 1.day.ago %>"
+
+google_verified:
+  <<: *default
+  email: "alice2@verified.org"
+  name: "Alice the Verified"
+
+twitch_new:
+  <<: *default
+  email: "aliceTwitch@spud.com"
+  name: "Alice the Twitcher"
+
+twitch_verified:
+  <<: *default
+  email: "aliceTwitch@verified.org"
+  name: "Alice the Verified"
+
+channel_publisher:
+  email: "channel_publisher@gmail.com"
+  name: "Carlos the Channel Adder"
+  agreed_to_tos: "<%= 1.day.ago %>"
+  default_currency: "BAT"
+
+global_media_group:
+  email: "fred@vglobal.org"
+  name: "Global Media Group"
+  agreed_to_tos: "<%= 1.day.ago %>"
+
+small_media_group:
+  email: "fred@small.org"
+  name: "Small Media Group"
+  two_factor_prompted_at: "<%= 1.day.ago %>"
+  agreed_to_tos: "<%= 1.day.ago %>"
+  default_currency: "BAT"
+
+medium_media_group:
+  email: "barney@medium.org"
+  name: "Medium Media Group"
+  two_factor_prompted_at: "<%= 1.day.ago %>"
+  agreed_to_tos: "<%= 1.day.ago %>"
+
+joe_the_only_yt_verified:
+  email: "joes-great-channel@pages.plusgoogle.com"
+  name: "Joe Schmoe"
+  agreed_to_tos: "<%= 1.day.ago %>"
+  two_factor_prompted_at: "<%= 1.day.ago %>"
+
+# A publisher that has not verified their email
+created:
+  email:
+  pending_email: "carolthecreated@example.com"
+  name: "Carol the created"
+  two_factor_prompted_at:
+  agreed_to_tos:
+
+# A publisher that has verified their email but not
+# agreed to TOS and addressed the 2fa prompt
+onboarding:
+  email: "owentheonboard@example.com"
+  name: "Owen the onboard"
+  agreed_to_tos:
+  two_factor_prompted_at:
+
+suspended:
+  email: "susanthesuspended@example.com"
+  name: "Susan the suspended"
+  agreed_to_tos: "<%= 1.day.ago %>"
+  two_factor_prompted_at: "<%= 1.day.ago %>"
+
+# Has one verified channel, and one unverified channel
+partially_completed:
+  email: "partially_completed@example.com"
+  name: "Perry"
+  agreed_to_tos: "<%= 1.day.ago %>"
+  two_factor_prompted_at: "<%= 1.day.ago %>"
+
+fraudulent_verifier:
+  email: "fraud@verifications.org"
+  name: "Frank the fraud"
+  agreed_to_tos: "<%= 1.day.ago %>"
+  two_factor_prompted_at: "<%= 1.day.ago %>"
+
+locked_out_verifier:
+  email: "locked_out@verifications.org"
+  name: "Logan the locked out"
+  agreed_to_tos: "<%= 1.day.ago %>"
+  two_factor_prompted_at: "<%= 1.day.ago %>"
+
+promo_enabled:
+  email: "enabled@promo.org"
+  name: "peter promo"
+
+promo_enabled_but_only_user_funds:
+  email: "only user funds@promo.org"
+  name: "peter promo"
+
+potentially_paid:
+  email: "priscilla@potentiallypaid.org"
+
+promo_not_registered:
+  email: "promo_not_registered@brave.com"
+  name: "Promo not registered"
+  agreed_to_tos: "<%= 1.day.ago %>"
+  two_factor_prompted_at: "<%= 1.day.ago %>"
+  default_currency_confirmed_at: "<%= 1.day.ago %>"
+  feature_flags: <%= { UserFeatureFlags::REFERRAL_KYC_REQUIRED => true }.to_json %>
+
+promo_lockout:
+  email: "promo_locked@brave.com"
+  name: "Promo locked"
+  agreed_to_tos: "<%= 1.day.ago %>"
+  two_factor_prompted_at: "<%= 1.day.ago %>"
+  default_currency_confirmed_at: "<%= 1.day.ago %>"
+
+publisher_selected_wallet_provider:
+  email: "provider@brave.com"
+  name: "Selected Wallet Provider"
+  selected_wallet_provider_type: UpholdConnection
+  selected_wallet_provider_id: uphold_connections(:selected_wallet_provider_connection)
+  agreed_to_tos: "<%= 1.day.ago %>"
+  two_factor_prompted_at: "<%= 1.day.ago %>"
+  default_currency_confirmed_at: "<%= 1.day.ago %>"
+
+bitflyer_pub:
+  email: "bitflyer_pub@brave.com"
+  name: "Bitflyer Pub"
+  agreed_to_tos: "<%= 1.day.ago %>"
+  two_factor_prompted_at: "<%= 1.day.ago %>"
+  default_currency_confirmed_at: "<%= 1.day.ago %>"
+  selected_wallet_provider: enabled_bitflyer_connection (BitflyerConnection)
+
+bitflyer_suspended:
+  email: "bitflyer_suspended@completed.org"
+  name: "Bitflyer the suspended"
+  two_factor_prompted_at: "<%= 1.day.ago %>"
+  agreed_to_tos: "<%= 1.day.ago %>"
+  default_currency_confirmed_at: "<%= DateTime.now %>"
+  subscribed_to_marketing_emails: true
+  selected_wallet_provider: suspended_bitflyer_connection (BitflyerConnection)

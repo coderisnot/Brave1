@@ -1,0 +1,18 @@
+doctype html
+html
+  head
+    title= t "shared.app_title"
+    = csrf_meta_tags
+    = stylesheet_link_tag('application', media: 'all')
+    = javascript_pack_tag('static')
+    link rel="icon" type="image/png" href=image_path("favicon.ico")
+
+  body.headless data-action=params[:action] data-controller=params[:controller]
+    - if flash.present?
+      div.flash.navbar-static-top
+        - if flash[:alert]
+          div.alert.alert-warning= flash[:alert]
+        - if flash[:notice]
+          div.alert.alert-info= flash[:notice]
+
+    = content_for?(:content) ? yield(:content) : yield

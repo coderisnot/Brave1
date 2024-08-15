@@ -1,0 +1,164 @@
+require "application_system_test_case"
+
+class LogInTest < ApplicationSystemTestCase
+  include ActionMailer::TestHelper
+  include Devise::Test::IntegrationHelpers
+  include Rails.application.routes.url_helpers
+  include MockRewardsResponses
+
+  before do
+    stub_rewards_parameters
+  end
+
+  def canned_u2f_response(registration)
+    ActiveSupport::JSON.encode({
+      keyHandle: registration.key_handle,
+      clientData: "eyJ0eXAiOiJuYXZpZ2F0b3IuaWQuZ2V0QXNzZXJ0aW9uIiwiY2hhbGxlbmdlIjoiMEVxTHk3TExoYWQyVVN1Wk9ScWRqZThsdG9VWHZQVUU5aHQyRU5sZ2N5VSIsIm9yaWdpbiI6Imh0dHBzOi8vbG9jYWxob3N0OjMwMDAiLCJjaWRfcHVia2V5IjoidW51c2VkIn0",
+      signatureData: "AQAAAAowRQIgfFLvGl1joGFlmZKPgIkimfJGt5glVEdiUYDtF8olMJgCIQCHIMR9ofM7VE7U6xURkDce8boCHwLq-vyVB9rWcKcscQ"
+    })
+  end
+
+  test "can navigate to log in from landing page" do
+    visit root_path
+    assert_content page, "Earn for your online content"
+    click_button("log in")
+    assert_content page, "Log in"
+  end
+
+  test "a user with an existing email can receive a login email" do
+    email = "alice@verified.org"
+
+    visit log_in_publishers_path
+
+    assert_content page, "Log In"
+    fill_in "email", with: email
+
+    click_button("Log In")
+
+    assert_content page, "We just sent an access link to #{email}"
+  end
+
+  test "after failed login, user can create an account instead" do
+    email = "new-test@example.com"
+
+    visit log_in_publishers_path
+
+    assert_content page, "Log In"
+    fill_in "email", with: email
+    click_button("Log In")
+
+    assert_content page, "An email is on its way"
+  end
+
+  test "a user can resend log in email" do
+    email = "alice@verified.org"
+
+    visit log_in_publishers_path
+
+    assert_content page, "Log In"
+    fill_in "email", with: email
+    click_button("Log In")
+
+    assert_enqueued_emails(1) do
+      # Firefox headless wonkiness, needs to click this twice where it just worked in Chrome
+      click_link("try again")
+    end
+  end
+
+  test "a user without 2FA enabled will be taken to the dashboard after log in" do
+    publisher = publishers(:completed)
+    visit log_in_publishers_path
+    assert_content page, "Log In"
+
+    fill_in "email", with: publisher.email
+    click_button "Log In"
+    visit publisher_path(publisher, token: publisher.reload.authentication_token)
+    assert_content page, "BALANCE"
+  end
+
+  test "a user with TOTP enabled will be asked for an auth code after log in" do
+    publisher = publishers(:verified_totp_only)
+    visit log_in_publishers_path
+    assert_content page, "Log In"
+
+    fill_in "email", with: publisher.email
+    click_button "Log In"
+    visit publisher_path(publisher, token: publisher.reload.authentication_token)
+    assert_content page, "Two-factor Authentication"
+    assert_content page, "Enter the authentication code from your mobile app to verify your identity."
+
+    ROTP::TOTP.any_instance.stubs(:verify).returns(Time.now.to_i)
+
+    fill_in "totp_password", with: "123456"
+    click_button "Verify"
+    assert_content page, "BALANCE"
+  end
+
+  test "a user with TOTP enabled can retry entry of their auth code" do
+    publisher = publishers(:verified_totp_only)
+    visit log_in_publishers_path
+    assert_content page, "Log In"
+
+    fill_in "email", with: publisher.email
+    click_button "Log In"
+    visit publisher_path(publisher, token: publisher.reload.authentication_token)
+    assert_content page, "Two-factor Authentication"
+    assert_content page, "Enter the authentication code from your mobile app to verify your identity."
+
+    ROTP::TOTP.any_instance.stubs(:verify).returns(false)
+    fill_in "totp_password", with: "wrong"
+    click_button "Verify"
+    assert_content page, "Invalid 6-digit code. Please try again."
+
+    ROTP::TOTP.any_instance.stubs(:verify).returns(Time.now.to_i)
+    fill_in "totp_password", with: "123456"
+    click_button "Verify"
+    assert_content page, "BALANCE"
+  end
+
+  test "a user with U2F enabled will be asked to insert their U2F device after log in" do
+    publisher = publishers(:verified)
+    u2f_registration = u2f_registrations(:default)
+
+    visit log_in_publishers_path
+    assert_content page, "Log In"
+
+    fill_in "email", with: publisher.email
+    click_button "Log In"
+    visit publisher_path(publisher, token: publisher.reload.authentication_token)
+    assert_content page, "Two-factor Authentication"
+    assert_content page, "Insert your security key and press the button on the key when blinking."
+
+    TwoFactorAuth::WebauthnVerifyService.any_instance.stubs(:call).returns(success_struct_empty)
+    u2f_response = canned_u2f_response(u2f_registration)
+
+    # Simulate U2F device usage, which submits the form on success
+    page.execute_script("document.querySelector('input[name=\"webauthn_u2f_response\"]').value = '#{u2f_response}';")
+    page.execute_script("document.querySelector('form.js-authenticate-u2f').submit();")
+    assert_content page, "+ Add Channel"
+  end
+
+  test "a user with U2F enabled can choose to use TOTP if they don't have their device" do
+    publisher = publishers(:verified)
+
+    visit log_in_publishers_path
+    assert_content page, "Log In"
+
+    fill_in "email", with: publisher.email
+    click_button "Log In"
+    visit publisher_path(publisher, token: publisher.reload.authentication_token)
+    assert_content page, "Two-factor Authentication"
+    assert_content page, "Insert your security key and press the button on the key when blinking."
+
+    click_link "Use authentication code instead."
+
+    assert_content page, "Two-factor Authentication"
+    assert_content page, "Enter the authentication code from your mobile app to verify your identity."
+
+    ROTP::TOTP.any_instance.stubs(:verify).returns(Time.now.to_i)
+
+    fill_in "totp_password", with: "123456"
+    click_button "Verify"
+    assert_content page, "BALANCE"
+  end
+end

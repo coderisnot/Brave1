@@ -1,0 +1,18 @@
+.totp-authentication {
+  svg {
+    margin-top: 4px;
+    margin-right: 16px;
+  }
+}
+
+.two-factor-authentication {
+  &--alternative-prompt {
+    margin-top: $spacer;
+  }
+  &--alternative-hr {
+    margin: $spacer*2 0 $spacer*3;
+  }
+  &--retry {
+    margin-top: $spacer*1.5;
+  }
+}

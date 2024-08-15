@@ -1,0 +1,9 @@
+# A list of site channels which are not included in browser contributions by default
+# The general rule of thumb is that we try to not auto-pay sites that users already pay,
+# such as commerce sites, financial services sites like banks, SaaS vendors and government sites.
+
+# DOMAINS (automated export from ledger)
+- "123.gov" # services # verified channel
+- "123.gov" # added twice for tests to prevent duplicates
+- "456.gov" # unverified channel
+- "456.gov" # added twice for tests to prevent duplicates

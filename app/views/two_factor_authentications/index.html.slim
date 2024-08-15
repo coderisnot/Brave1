@@ -1,0 +1,72 @@
+.single-panel--wrapper
+  = render "panel_flash_messages"
+
+  .error-group--wrapper.js-authenticate-u2f-error
+
+    .js-u2f-error-bad-request
+      .single-panel--content.single-panel--content--alert.icon-and-text--wrapper
+        .icon-and-text--icon
+          = render "icon_circled_x"
+        .icon-and-text--text
+          = t ".u2f-error.bad-request"
+
+    .js-u2f-error-configuration-unsupported
+      .single-panel--content.single-panel--content--alert.icon-and-text--wrapper
+        .icon-and-text--icon
+          = render "icon_circled_x"
+        .icon-and-text--text
+          = t ".u2f-error.configuration-unsupported"
+
+    .js-u2f-error-device-ineligible
+      .single-panel--content.single-panel--content--alert.icon-and-text--wrapper
+        .icon-and-text--icon
+          = render "icon_circled_x"
+        .icon-and-text--text
+          = t ".u2f-error.device-ineligible"
+
+    .js-u2f-error-other-error
+      .single-panel--content.single-panel--content--alert.icon-and-text--wrapper
+        .icon-and-text--icon
+          = render "icon_circled_x"
+        .icon-and-text--text
+          = t ".u2f-error.other-error"
+
+    .js-u2f-error-timeout
+      .single-panel--content.single-panel--content--alert.icon-and-text--wrapper
+        .icon-and-text--icon
+          = render "icon_circled_x"
+        .icon-and-text--text
+          = t ".u2f-error.timeout"
+
+    .js-u2f-error-implementation-incomplete
+      .single-panel--content.single-panel--content--alert.icon-and-text--wrapper
+        .icon-and-text--icon
+          = render "icon_circled_x"
+        .icon-and-text--text
+          = t ".u2f-error.implementation-incomplete"
+
+  - if @webauthn_u2f_backwards_compat_authentication_attempt
+    div.js-feature-u2f-unavailable
+      .single-panel--content.single-panel--content--warning.icon-and-text--wrapper
+        .icon-and-text--icon
+          = render "icon_circled_bang_warning"
+        .icon-and-text--text
+          == t ".u2f_unavailable_html"
+
+
+  .single-panel--content
+    .single-panel--padded-content
+      - if @removal.present?
+        = render partial: 'removal', locals: { removal: @removal }
+      - elsif @webauthn_u2f_backwards_compat_authentication_attempt
+        = render partial: "u2f", locals: {webauthn_get_options: @webauthn_u2f_backwards_compat_authentication_attempt}
+      - elsif @totp_enabled
+        = render "totp"
+    .single-panel--footer.mt-0
+      strong = t(".lost_account.lost_2fa")
+      strong.ml-1 = link_to(t(".lost_account.lost_2fa_link"), new_two_factor_authentications_removal_path)
+      br
+      br
+      p = t(".lost_account.lost_2fa_note_html")
+
+

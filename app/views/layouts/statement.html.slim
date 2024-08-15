@@ -1,0 +1,18 @@
+html
+  head
+    scss:
+      body {
+        font-family: "Arial";
+        td {
+          padding-left: 5px;
+          padding-right: 5px;
+        }
+        table {
+          padding-top: 20px;
+        }
+      }
+  body
+    .container.bg-white.shadow-sm.p-4.rounded
+      #statement_details data-statement=@overview.to_json
+    =append_javascript_pack_tag('StatementDetails')
+

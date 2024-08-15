@@ -1,0 +1,20 @@
+- content_for(:title) do
+  h3= t("promo_mailer.new_channel_registered_2018q1.subject")
+
+p.salutation= t "publisher_mailer.shared.salutation", name: @publisher.name
+
+p = t "promo_mailer.promo_activated_2018q1_verified.body_one_html", channel: @channel.details.publication_title
+
+.promo--referral-link-container
+  
+  .promo--referral-title = t "publisher_mailer.shared.channel_name", channel: @channel.details.publication_title
+  
+  .promo--referral-link = link_to(https_referral_url(@channel.promo_registration.referral_code), https_referral_url(@channel.promo_registration.referral_code))
+
+  .promo-share-container
+    = link_to(t("promo.shared.tweet"), tweet_url(@channel.promo_registration.referral_code), target: :_blank, class: 'promo--share-button twitter')	
+    = link_to(t("promo.shared.share"), facebook_url(@channel.promo_registration.referral_code), target: :_blank, class: 'promo--share-button facebook')
+
+.notice 
+  p= t("promo.shared.tos_2_html")
+  p= t("shared.support_note_html")

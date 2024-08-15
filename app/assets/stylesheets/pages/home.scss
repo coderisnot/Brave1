@@ -1,0 +1,1442 @@
+.camera-background {
+  background-size: 60px 47px;
+  width: 60px;
+  height: 47px;
+  background-image: url(asset-path("camera@2x.png"));
+  background-color: transparent;
+  border-style: none;
+}
+
+#icn-donation-jar {
+  margin-bottom: 30px;
+}
+
+.selectable + .selectable {
+  margin: 8px 0;
+}
+
+.selectable {
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid inherit;
+  border-radius: $brave-panels-borderRadius;
+
+  font-weight: 600;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 3px 8px;
+  letter-spacing: 0.02em;
+}
+
+.selected {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  a {
+    color: white;
+  }
+
+  .promo-panel-number {
+    color: white !important;
+  }
+
+  @media (max-width: 960px) {
+    svg {
+      transform: rotate(90deg);
+      -webkit-transform: rotate(90deg);
+      -moz-transform: rotate(90deg);
+      -ms-transform: rotate(90deg);
+      -o-transform: rotate(90deg);
+    }
+  }
+}
+
+.brave-rewards-banner {
+  &--background {
+    &-label {
+      display: block;
+      margin-left: -4px;
+      margin-top: 5px;
+      font-size: 16px;
+    }
+
+    &-camera {
+      margin-left: 46%;
+      margin-top: -60px;
+    }
+  }
+
+  &--logo {
+    &-parent {
+      position: relative;
+    }
+
+    &-label {
+      display: block;
+      margin-left: -4px;
+      margin-top: 5px;
+      font-size: 16px;
+    }
+
+    &-no-attachment {
+      margin-left: 30%;
+      position: absolute;
+    }
+
+    &-camera {
+      margin-left: 30%;
+      margin-top: 30%;
+      position: absolute;
+    }
+  }
+}
+
+.nav {
+  display: block;
+
+  .title {
+    display: none;
+  }
+
+  .title-partner {
+    display: inline-block;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 18px;
+  }
+
+  @include media-breakpoint-down(md) {
+    .title,
+    .btn {
+      display: none;
+    }
+  }
+
+  @media only screen and (max-width: 1300px) {
+    .title-partner {
+      display: none;
+    }
+  }
+
+  .title,
+  .btn {
+    margin-right: 25px;
+  }
+
+  .title-partner,
+  .btn {
+    margin-right: 25px;
+  }
+}
+
+.pagination {
+  padding: 3px;
+  margin: 3px;
+}
+.pagination a {
+  padding: 2px 5px 2px 5px;
+  margin: 2px;
+  border: 1px solid #dfdfe8;
+  text-decoration: none;
+  color: #131525;
+}
+.pagination a:hover,
+.pagination a:active {
+  border: 1px solid #131525;
+}
+.pagination em.current {
+  padding: 2px 5px 2px 5px;
+  margin: 2px;
+  border: 1px solid #dfdfe8;
+  font-weight: bold;
+  font-style: normal;
+}
+.pagination span.disabled {
+  padding: 2px 5px 2px 5px;
+  margin: 2px;
+  border: 1px solid #eee;
+  color: #ddd;
+}
+
+.dashboard {
+  max-width: 1140px;
+  margin: auto;
+
+  .promo--tos {
+    color: $braveText-3;
+    opacity: 0.7;
+    font-size: 12px;
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .promo-panel {
+    background-color: #00bcd6;
+    width: 100%;
+    border-radius: 8px;
+    padding: 32px;
+    box-shadow: $defaultBoxShadow;
+
+    &-item-info {
+      margin: 12px;
+    }
+
+    &-item-button {
+      margin: 12px;
+    }
+
+    &-header {
+      color: #326183;
+      letter-spacing: 0.5px;
+    }
+
+    .promo-flex-col {
+      display: flex;
+      justify-content: space-evenly;
+      flex-direction: column;
+      color: #fff;
+    }
+
+    .promo-flex-stats {
+      display: flex;
+      flex-direction: column-reverse;
+      justify-content: space-between;
+    }
+
+    @media only screen and (max-width: 400px) {
+      .promo-flex-stats {
+        flex-direction: column;
+      }
+    }
+
+    .promo-flex-row {
+      display: flex;
+      justify-content: space-between;
+
+      &-sub {
+        color: #326183;
+        font-size: 14px;
+        margin: 0 0 16px;
+      }
+    }
+
+    .promo-panel-header {
+      text-align: center;
+      font-weight: 600;
+      font-size: 1em;
+    }
+
+    .promo-table {
+      color: #326183;
+      letter-spacing: 0.5px;
+      font-size: 14px;
+
+      tr {
+        border-bottom: solid 1px rgba(0, 0, 0, 0.2);
+        border-top: solid 1px rgba(0, 0, 0, 0.2);
+
+        td {
+          padding: 5px 3px;
+        }
+      }
+    }
+
+    .promo-info {
+      margin-top: 15px;
+
+      display: flex;
+      align-items: center;
+
+      svg {
+        width: 18px;
+        height: 18px;
+        margin: 0 10px 0 0;
+      }
+
+      a {
+        color: #fff !important;
+      }
+    }
+
+    .promo-period {
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 5px 10px;
+      font-weight: 600;
+
+      border-radius: $brave-panels-borderRadius;
+
+      select {
+        border: 0;
+        color: #eee;
+        background: transparent;
+        font-weight: bold;
+        padding: 2px 10px;
+        -webkit-appearance: none;
+      }
+    }
+
+    .promo-panel-number {
+      padding-left: 10px;
+      text-align: right;
+      font-weight: 600;
+      font-size: 30px;
+      color: white;
+    }
+
+    .promo-panel-title {
+      display: flex;
+      flex-direction: column;
+
+      &-item {
+        display: inline;
+        text-align: left;
+        font-weight: 600;
+        padding: 0 8px 0 0;
+        font-size: 24px;
+        color: #fff;
+      }
+    }
+
+    .promo-panel-item {
+      #promo-limited-time {
+        color: #006192;
+        font-weight: 700;
+      }
+
+      #promo-header {
+        color: white;
+        font-weight: 600;
+        margin-bottom: 0px;
+      }
+
+      #promo-referring-fans {
+        color: #bcf0f7;
+        font-size: 20px;
+        font-weight: 500;
+      }
+
+      #activate-promo-dashboard-button {
+        background: white;
+        color: #4c54d2;
+        border: none;
+
+        &:hover,
+        &focus {
+          background: #bcf0f7;
+        }
+
+        font-size: 12px;
+        font-weight: 600;
+        font-weight: 700;
+      }
+
+      &-alert {
+        #promo-panel-alert {
+          font-size: 14px;
+          font-weight: 600;
+          color: #006192;
+          padding: 30px 30px 35px 70px;
+          margin-right: 20px;
+          background-color: rgba(255, 255, 255, 0.6);
+          text-align: left;
+          border-radius: 10px;
+          background-image: url(asset-path("icn-info.png"));
+          background-position: center left 15px;
+          background-repeat: no-repeat;
+        }
+      }
+    }
+  }
+  .col-md-5 {
+    .promo-panel-header {
+      font-size: 0.75em;
+    }
+  }
+
+  .channel--promo-info-container {
+    @media only screen and (max-width: 520px) {
+      margin: 8px 0;
+      display: flex;
+      position: initial;
+    }
+
+    .promo-info-item {
+      height: 100%;
+      text-align: center;
+      display: table-cell;
+      vertical-align: middle;
+      padding: 4px;
+    }
+
+    .referral-link-button {
+      background: #edf3f9;
+      display: table-cell;
+      border-radius: 4px;
+      padding: 8px;
+      cursor: pointer;
+
+      span {
+        transition: opacity 0.7s linear;
+      }
+
+      span.fadedOut {
+        opacity: 0;
+      }
+
+      &-mobile {
+        display: none;
+      }
+    }
+
+    .referral-link-url {
+      background: #edf3f9;
+      height: 100%;
+      text-align: left;
+      padding-left: 8px;
+      border: solid;
+      border-width: 1px 0px 1px 1px;
+      border-radius: 4px 0px 0px 4px;
+      border-color: #cddeec;
+      white-space: nowrap;
+      display: none;
+    }
+
+    .referral-link-copy-button {
+      background: $braveBrand;
+      color: white;
+      height: 100%;
+      border-radius: 0px 4px 4px 0px;
+      cursor: pointer;
+      display: none;
+    }
+
+    .promo-share-button {
+      height: 36px;
+      width: 36px;
+      display: table-cell;
+      background-position: center;
+      background-repeat: no-repeat;
+
+      &-twitter {
+        background-image: url(asset-path("tweet.png"));
+      }
+
+      &-facebook {
+        background-image: url(asset-path("f-share.png"));
+      }
+    }
+
+    &-slideout {
+      .promo-info-item {
+        display: table-cell;
+      }
+
+      .referral-link-button {
+        display: none;
+      }
+    }
+
+    @include media-breakpoint-down(sm) {
+      .referral-link-button {
+        &-mobile {
+          display: table-cell;
+        }
+
+        &-desktop {
+          display: none;
+        }
+      }
+
+      .referral-link-copy-button {
+        display: none;
+      }
+
+      .referral-link-url {
+        display: none;
+      }
+    }
+  }
+
+  .dashboard-panel {
+    &--wrapper {
+      padding: 32px;
+      background-color: white;
+      border-radius: $brave-panels-borderRadius;
+      box-shadow: $defaultBoxShadow;
+      height: 100%;
+
+      .wide-action {
+        margin-left: 15px;
+      }
+
+      .minor-action {
+        font-size: 13px;
+        margin-top: 5px;
+      }
+    }
+    &--browser-user {
+      padding: 28px;
+      min-width: 250px;
+      height: 200px;
+      margin-left: 15px;
+      margin-bottom: 20px;
+    }
+
+    &--header-with-image {
+      margin-left: -10px;
+      padding: 4px 0 4px;
+      font-size: 20px;
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+      flex-basis: 50%;
+      font-weight: 600;
+    }
+
+    &--header-image {
+      margin-top: -10px;
+      margin-right: 15px;
+    }
+
+    &--header-right-aligned-image {
+      margin-top: -15px;
+      margin-left: auto;
+    }
+
+    &--header {
+      padding: 4px 0 4px;
+      font-size: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 600;
+    }
+
+    &--content {
+      margin-bottom: 24px;
+    }
+  }
+
+  .block-note {
+    background: #f0f0f0;
+    border: 1px solid #cccccc;
+    padding: 10px 15px;
+    color: $braveText-2;
+    border-radius: $brave-panels-borderRadius;
+  }
+
+  .form-group {
+    padding-top: 5px;
+  }
+
+  .form-group.button:last-child {
+    margin: 40px 0 20px 0;
+  }
+
+  .control-label {
+    font-weight: 500;
+    color: $braveText-2;
+  }
+
+  .attribute-value {
+    margin-bottom: 24px;
+  }
+
+  h4.balance-header {
+    font-size: 13px;
+  }
+
+  #uphold_status {
+    #uphold_status_display {
+      vertical-align: top;
+      margin-bottom: 5px;
+    }
+
+    .unavailable-currencies {
+      padding: 9px 0 9px 52px;
+      background-position: left center;
+      background-repeat: no-repeat;
+      background-size: 42px;
+      background-image: url(asset-path("icn-warning@1x.png"));
+    }
+
+    .status-summary {
+      font-size: 14px;
+
+      .text {
+        display: inline-block;
+
+        &:before {
+          content: "\25CF\00a0";
+        }
+      }
+      .reload-paypal {
+        margin-left: 15px;
+      }
+      .action {
+        display: inline-block;
+        margin-left: 15px;
+
+        .disconnect-uphold {
+          color: $braveText-4;
+        }
+      }
+    }
+
+    .field {
+      margin: $spacer * 0.4 0;
+
+      label {
+        display: inline-block;
+        margin: 0;
+      }
+
+      .value {
+        display: inline-block;
+        margin-left: 11px;
+      }
+
+      .action {
+        display: inline-block;
+        margin-left: 11px;
+      }
+    }
+
+    #last_settlement {
+      .last-deposit-v2 {
+        font-size: 13px;
+        font-family: $headings-font-family;
+        margin-left: 20px;
+        &--label {
+          font-size: 16px;
+        }
+        &--amount {
+          font-size: 16px;
+        }
+        &--date {
+          color: $braveGray-6;
+        }
+        &--no-payout-account {
+          color: #ff3f3f;
+        }
+      }
+
+      .last-deposit {
+        font-size: $font-size-base;
+        vertical-align: top;
+        margin-top: 34px;
+
+        .amounts {
+          .bat-amount {
+            font-size: 30px;
+            color: $braveBrand;
+            font-weight: 500;
+            &--browser-user {
+              font-size: 30px;
+              color: $braveBrand;
+              font-weight: 500;
+            }
+          }
+
+          .bat-code {
+            font-size: 16px;
+            color: $braveText-2;
+            font-weight: 500;
+          }
+
+          .converted {
+            margin-top: -8px;
+            font-size: 14px;
+            color: $braveGray-4;
+          }
+        }
+      }
+    }
+
+    #uphold_check_balance {
+      margin-top: 2rem;
+    }
+
+    &.uphold-timeout {
+      .status-summary .action,
+      #uphold_dashboard,
+      #uphold_connect,
+      #last_settlement,
+      .statements-available {
+        display: none;
+      }
+    }
+
+    &.uphold-complete,
+    &.uphold-processing {
+      .status-summary .action .connect-uphold,
+      #uphold_connect {
+        display: none;
+      }
+    }
+
+    &.uphold-processing {
+      #uphold_dashboard,
+      #last_settlement,
+      .statements-available {
+        display: none;
+      }
+    }
+
+    &.uphold-complete {
+      .statements-unavailable {
+        display: none;
+      }
+    }
+
+    &.uphold-restricted,
+    &.uphold-reauthorization-needed,
+    &.uphold-unconnected {
+      .status-description {
+        background-position: left;
+        background-repeat: no-repeat;
+        background-size: 30px;
+        background-image: url(asset-path("icn-warning@1x.png"));
+        padding: 0 0 0 48px;
+        margin: 0 0 24px;
+        font-size: 14px;
+      }
+
+      #uphold_connect {
+        margin-top: 30px;
+      }
+
+      #uphold_dashboard,
+      #last_settlement,
+      .statements-available {
+        display: none;
+      }
+    }
+
+    &.uphold-reauthorization-needed,
+    &.uphold-unconnected {
+      .status-summary .action .disconnect-uphold,
+      .reconnect-instructions {
+        display: none;
+      }
+    }
+
+    &.uphold-restricted {
+      .status-summary .action .connect-uphold,
+      .reconnect-instructions {
+        display: none;
+      }
+
+      .status-summary,
+      #reconnect_to_uphold {
+        display: none;
+      }
+
+      .status-summary,
+      #go_to_uphold {
+        /* (Albert Wang): We add lot"s of crazy complexity by disabling HTML elements */
+        display: inline !important;
+      }
+    }
+
+    // Status summary label
+    &.uphold-complete,
+    &.uphold-restricted,
+    &.uphold-blocked,
+    &.uphold-processing {
+      .status-summary .text {
+        color: darken(#2aeaa1, 10%);
+      }
+    }
+
+
+    &.uphold-reauthorization-needed,
+    &.uphold-timeout {
+      .status-summary .text {
+        color: $braveRed;
+      }
+    }
+
+    &.uphold-unconnected {
+      .status-summary .text {
+        color: $braveGray-6;
+      }
+    }
+
+    &.uphold-processing {
+      .status-summary .text {
+        animation: blinker 1s linear infinite;
+      }
+    }
+  }
+
+  #update_publisher_marketing_email_form {
+    padding: 24px 24px 0 24px;
+
+    .form-check-input {
+      vertical-align: top;
+      margin-top: 5px;
+    }
+
+    .form-check-label {
+      padding-left: 15px;
+      font-size: 15px;
+      font-weight: 300;
+    }
+  }
+
+  .payouts {
+    display: flex;
+  }
+
+  .balance {
+    font-size: $font-size-base;
+    display: flex;
+    justify-content: flex-start;
+    color: $braveText-2;
+
+    #bat-logo {
+      margin: 12px;
+    }
+
+    .amounts {
+      display: flex;
+      flex-direction: column;
+      min-width: 12em;
+
+      .bat-amount {
+        font-size: 48px;
+        line-height: 42px;
+        &--browser-user {
+          font-size: 32px;
+        }
+      }
+
+      .bat-code {
+        font-size: 16px;
+      }
+
+      .converted {
+        font-size: 14px;
+        color: $braveGray-4;
+      }
+    }
+  }
+
+  .add-channel-cta {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 0 0 5px 52px;
+    background-position: top left;
+    background-repeat: no-repeat;
+    background-size: 42px;
+    background-image: url(asset-path("icn-info.png"));
+  }
+
+  .channel-placeholder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px dashed $braveBrand-Light;
+    border-radius: 8px;
+    color: $braveBrand;
+    font-weight: 600;
+    padding: 32px;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+    }
+  }
+
+  .channel-row {
+    &.channel-hidden {
+      transition: max-height 300ms ease-out;
+      max-height: 0;
+      overflow: hidden;
+    }
+  }
+
+  .channel-panel {
+    padding: 24px;
+    border-radius: $brave-panels-borderRadius;
+    background-color: white;
+    box-shadow: $defaultBoxShadow;
+    position: relative;
+
+    .channel-summary {
+      width: 100%;
+
+      // Apply a max width when the screen gets smaller to trim long channel names
+      @media only screen and (max-width: 768px) {
+        max-width: 10rem;
+      }
+
+      h3 {
+        font-size: 20px;
+      }
+
+      h3.unverified {
+        padding-top: 11px;
+      }
+
+      .channel-details {
+        font-size: 14px;
+        display: flex;
+      }
+
+      .separator {
+        padding: 0 8px;
+      }
+    }
+
+    .channel-secondary-information {
+      @media only screen and (max-width: 560px) {
+        width: 100%;
+        margin: 0.5em 0;
+      }
+    }
+
+    &.channel-incomplete,
+    &.channel-started,
+    &.channel-failed {
+      background-color: rgba(255, 255, 255, 0.6);
+    }
+
+    &.channel-incomplete {
+      .channel-progress {
+        padding: 8px 0;
+
+        .one-more-step {
+          font-size: 14px;
+          padding: 3px 0 3px 115px;
+          margin-right: 10px;
+          background: url(asset-path("channel-progress.png")) no-repeat center
+            left;
+        }
+      }
+    }
+
+    &.channel-failed {
+      .channel-status {
+        display: flex;
+        background: url(asset-path("icn-warning@1x.png")) no-repeat top left /
+          24px 24px;
+        padding: 0 0 12px 38px;
+        font-weight: bold;
+
+        .btn {
+          vertical-align: top;
+          margin-left: 10px;
+        }
+
+        .verification-failed {
+          .verification-failed--details {
+            position: relative;
+            font-size: 14px;
+            font-weight: 500;
+
+            .verification-failed--what-happened {
+              color: $braveBrand;
+              cursor: pointer;
+            }
+          }
+
+          .verification-failed--explanation {
+            display: none;
+            position: absolute;
+            left: -145px;
+            bottom: 100%;
+            padding: 30px 40px;
+            background: white;
+            border-radius: 4px;
+            box-shadow: $defaultBoxShadow;
+            font-size: 14px;
+
+            &::after {
+              content: " ";
+              position: absolute;
+              top: 100%;
+              left: 50%;
+              width: 10px;
+              height: 10px;
+              margin-top: -5px;
+              margin-left: -5px;
+              background: white;
+              transform: rotate(45deg);
+              border: solid 1px $braveGray-8;
+              border-top-color: transparent;
+              border-left-color: transparent;
+            }
+
+            .verification-failed--explanation-content {
+              display: block;
+            }
+          }
+        }
+      }
+    }
+
+    &.channel-verified {
+      .channel-status {
+        background: url(asset-path("bat-logo@1x.png")) no-repeat top left;
+        background-size: 30px 28.5px;
+        padding: 1px 0 12px 38px;
+      }
+
+      .channel-contested {
+        p {
+          margin: 5px 0px 0px 0px;
+        }
+      }
+    }
+
+    .channel-info {
+      display: flex;
+      background: url(asset-path("icn-info.png")) no-repeat top left / 24px 24px;
+      padding: 0 0 12px 38px;
+      font-weight: bold;
+
+      .btn {
+        vertical-align: top;
+        margin-left: 10px;
+      }
+
+      .info-popup {
+        .info--details {
+          position: relative;
+          font-size: 14px;
+          font-weight: 500;
+
+          .info--what-happened {
+            color: $braveBrand;
+            cursor: pointer;
+          }
+        }
+
+        .info--explanation {
+          display: none;
+          position: absolute;
+          left: -145px;
+          bottom: 100%;
+          padding: 30px 40px;
+          background: white;
+          border-radius: 4px;
+          box-shadow: $defaultBoxShadow;
+          font-size: 14px;
+
+          &::after {
+            content: " ";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            width: 10px;
+            height: 10px;
+            margin-top: -5px;
+            margin-left: -5px;
+            background: white;
+            transform: rotate(45deg);
+            border: solid 1px $braveGray-8;
+            border-top-color: transparent;
+            border-left-color: transparent;
+          }
+
+          .verification-failed--explanation-content {
+            display: block;
+          }
+        }
+      }
+    }
+
+    &--intro {
+      display: flex;
+      align-items: center;
+    }
+
+    &--intro-icon {
+      margin-right: 8px;
+      display: flex;
+    }
+
+    &--intro-body {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1;
+    }
+  }
+
+  .payment-info {
+    font-size: $font-size-base;
+  }
+
+  .header-link {
+    font-size: 16px;
+    font-weight: 500;
+    color: $braveBrand;
+    display: inline-block;
+  }
+
+  .bat-channel {
+    &--amount {
+      font-size: 28px;
+      display: inline;
+      line-height: 1;
+    }
+
+    &--currency {
+      font-size: 14px;
+      display: inline;
+      color: $braveText-2;
+      line-height: 1;
+      padding-left: 3px;
+    }
+
+    &--period {
+      line-height: 1;
+      color: $braveText-3;
+      font-size: 12px;
+      font-weight: 600;
+    }
+  }
+}
+
+.modal-container--modal-identifier--new_secret_key {
+  min-width: 500px;
+
+  .modal-panel {
+    padding: 0;
+    margin: 0;
+    width: inherit;
+    max-width: inherit;
+    min-width: inherit;
+
+    &--close {
+      position: absolute;
+      right: 20px;
+      top: 12px;
+    }
+
+    &--content {
+      padding: 0;
+      margin: 0;
+    }
+  }
+
+  .header-box {
+    background: linear-gradient(
+        -225deg,
+        rgba(255, 255, 255, 0.5) 0%,
+        rgba(0, 0, 0, 0.2) 100%
+      )
+      rgb(76, 84, 210);
+    background: $braveBrand;
+    padding: 24px;
+    border-radius: 8px 8px 0 0;
+
+    h3,
+    p {
+      color: #fff;
+      margin: 8px;
+      padding: 0;
+    }
+  }
+}
+
+.modal-container--modal-identifier--choose-channel-type {
+  max-width: 960px;
+  width: 100%;
+
+  .modal-panel {
+    padding: 0;
+    margin: 0;
+    width: inherit;
+    max-width: inherit;
+    min-width: inherit;
+
+    &--close {
+      position: absolute;
+      right: 20px;
+      top: 12px;
+    }
+
+    &--content {
+      padding: 0;
+      margin: 0;
+    }
+  }
+  .text-center {
+    padding: 0;
+  }
+  .choose-channel {
+    &--header-box {
+      background: linear-gradient(
+          -225deg,
+          rgba(255, 255, 255, 0.5) 0%,
+          rgba(0, 0, 0, 0.2) 100%
+        )
+        rgb(76, 84, 210);
+      background: $braveBrand;
+      padding: 24px;
+      border-radius: 8px 8px 0 0;
+
+      h3,
+      p {
+        color: #fff;
+        margin: 8px;
+        padding: 0;
+      }
+    }
+    &--body-box {
+      padding: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      overflow-y: auto;
+      max-height: calc(100vh - 150px);
+    }
+  }
+
+  .new-tag {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: $braveBrand;
+    border-radius: 40px;
+    color: #fff;
+    font-size: 16px;
+    padding: 4px 12px;
+
+    &::before {
+      content: "New";
+    }
+  }
+
+  // this is overwriting bootstrap card styles via specificity
+  & .block-link--card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    word-wrap: break-word;
+    background-color: #fff;
+    border: 1px solid $borderColor;
+    border-radius: 12px;
+    // new styles
+    max-width: 260px;
+    min-width: 210px;
+    padding: 24px;
+    margin: 12px;
+
+    &:hover {
+      box-shadow: 0 0 0 2px $braveBrand;
+    }
+
+    & .card-body {
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-width: 210px;
+
+      & .icon-and-text {
+        &--icon {
+          margin: 20px;
+          height: 80px;
+          width: 80px;
+        }
+        &--text {
+          text-align: center;
+          color: $braveText-4;
+
+          & h6 {
+            color: $braveText-2;
+          }
+        }
+      }
+    }
+  }
+}
+
+.referral-graph {
+  display: grid;
+  grid-template-columns: 2fr 2fr 1fr;
+  gap: 16px;
+
+  h4 {
+    margin: auto 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: $braveText-2;
+  }
+
+  @media only screen and (max-width: 560px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+  }
+}
+
+.bat-logo {
+  padding: 8px;
+}
+
+.uphold-panel {
+  min-height: 336px;
+}
+
+.bot-marg {
+  margin: 0 0 24px;
+}
+
+p,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: $braveText-2;
+}
+
+#cancel_edit_contact {
+  padding: 8px;
+}
+
+.grayscale {
+  filter: grayscale(100%);
+}
+
+.withheld-color {
+  color: $braveGray-3;
+}
+
+.line {
+  height: 8em;
+  width: 1px;
+  align-self: center;
+  background: $braveGray-7;
+}
+.h-line {
+  width: 80%;
+  height: 1px;
+  align-self: center;
+  background: $braveGray-7;
+}
+
+.warning-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.container-panel {
+  background: white;
+  border-radius: 8px;
+  box-shadow: $defaultBoxShadow;
+}
+
+.fade {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 0.5s, opacity 0.5s linear;
+}
+
+.visible {
+  visibility: visible;
+  opacity: 1;
+}
+
+.u-avatar {
+  margin: 4px;
+  width: 42px;
+  height: 42px;
+  border: solid 1px rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+  overflow: hidden;
+
+  svg {
+    width: 40px;
+    height: 40px;
+    opacity: 0.8;
+    filter: brightness(5) grayscale(1)
+      drop-shadow(0px 0px 1px rgba(0, 0, 0, 0.3));
+  }
+}
+
+.deposit-date-explanation {
+  color: $braveGray-5;
+  font-size: 13px;
+  margin-left: 20px;
+  margin-right: 40px;
+  margin-bottom: 5px;
+}
+
+.screenshot {
+  max-width: 300px;
+}
+
+.payout-connected-highlight {
+  margin-left: 20px;
+  font-size: 14px;
+  color: #14cd86;
+}
+
+.payout-account-disconnect-button {
+  font-size: 14px;
+}
+
+.payout-progress {
+  display: flex;
+  align-items: center;
+
+  .icon {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+
+    &.active {
+      background: $braveBrand;
+    }
+
+    &.inactive {
+      border: 1px solid $braveGray-8;
+    }
+
+    &.animated {
+      animation: colorchange 3s linear infinite;
+
+      @keyframes colorchange {
+        0% {
+          background: $braveBrand;
+        }
+        50% {
+          background: $braveBrand-Light;
+        }
+        100% {
+          background: $braveBrand;
+        }
+      }
+    }
+  }
+
+  progress {
+    width: auto;
+    flex-grow: 1;
+    height: 1px;
+    background: $braveGray-8;
+    -webkit-appearance: none;
+  }
+  progress::-webkit-progress-bar {
+    background: $braveGray-8;
+  }
+  progress::-webkit-progress-value {
+    background: $braveBrand;
+  }
+}
+
+#gemini-regions,
+#uphold-regions {
+  max-width: 300px;
+}

@@ -1,0 +1,78 @@
+div.row
+  div.col-sm-12
+    section.panel
+      = form_tag(admin_publishers_path, method: "get")
+        .input-group
+            = text_field_tag(:q, params[:q], class:'form-control')
+            .input-group-btn
+                = submit_tag("Search", class: 'btn btn-default')
+hr
+#publisher
+  #publisher-section.shadow-sm
+    = render partial: 'admin/shared/publisher_header', locals: { navigation_view: @navigation_view }
+    .border-top
+    = render_async admin_publisher_wallet_info_path(@publisher.id), container_class: 'p-4 split-row-container bg-white' do
+      .spinner-border.center.text-primary role="status"
+
+  - if @payout_report.present?
+    .c-4.shadow-sm.bg-white.rounded.p-3.my-4
+      = render partial: 'publishers/payout_status', locals: { payout_report: @payout_report, publisher: @publisher }
+      - if @payout_message.present?
+        .mt-4
+        h5.text-dark Payout Message
+        .alert.alert-dark
+          = @payout_message.message
+
+  .c-4.shadow-sm.bg-white.rounded.p-3.my-4
+    = render partial: 'uphold'
+
+  -if @publisher.invoice?
+    .c-4.shadow-sm.bg-white.rounded.p-3.my-4
+      =render partial: "invoices", locals: { publisher: @publisher, limit:  params[:view_more].present? ? nil : 3 }
+
+  .c-4.shadow-sm.bg-white.rounded.p-3.my-4
+    h3.text-dark Channels
+    #channels-section
+      - @channels.each do |channel|
+        = render partial: 'channel', locals: { channel: channel }
+      = will_paginate @channels
+
+  .c-4.shadow-sm.bg-white.rounded.p-3.my-4
+    .accordion
+      .panel
+        input type="checkbox" name="panels" id="panel_id"
+          label.d-flex for="panel_id"
+            h3.text-dark Add Note
+            = fa_icon "comment-o lg", class: 'text-dark mt-2 ml-2'
+        .panel-content
+          = render partial: 'admin/publisher_notes/form', locals: { note: PublisherNote.new, publisher: @publisher }
+
+
+  .c-4.shadow-sm.bg-white.rounded.p-3.my-4
+    h3.text-dark.d-flex.align-items-center
+      small=fa_icon "hourglass-half", class: 'mx-2'
+      = "History"
+    hr
+    #notes-section
+      #create-note
+      - @publisher.history.each do |h|
+        - if h.is_a?(PublisherNote)
+          = render partial: 'note', locals: { note: h, publisher: @publisher, current_user: @current_user}
+          hr
+        - elsif h.is_a?(PublisherStatusUpdate)
+          = render partial: 'status', locals: { status: h, publisher: @publisher, current_user: @current_user}
+          hr
+        - elsif h.instance_of?(PaperTrail::Version)
+          - if h.item_type.eql?("Case")
+            = render partial: 'case', locals: { history: h }
+
+
+
+javascript:
+  window.addEventListener("keydown",function (e) {
+      if ((e.ctrlKey || e.metaKey) && e.keyCode === 70) {
+        document.querySelectorAll('.toggle').forEach((i) => i.classList.toggle('d-none'))
+      }
+  })
+
+= append_javascript_pack_tag 'tribute'

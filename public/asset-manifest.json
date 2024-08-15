@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/static/css/main.4cb5f7de.css",
+    "main.js": "/static/js/main.e7e2a61a.js",
+    "static/media/creator-logos-wide.png": "/static/media/creator-logos-wide.659e405dd7c94f22308e.png",
+    "static/media/creator-logos-wide.webp": "/static/media/creator-logos-wide.66a57cd28d72d9e178b6.webp",
+    "static/media/card-defranco.png": "/static/media/card-defranco.43ddea417be3635b228d.png",
+    "static/media/card-scotty.png": "/static/media/card-scotty.bd693612cdab56f46d87.png",
+    "static/media/card-baker.png": "/static/media/card-baker.67d761327c727b518ad1.png",
+    "static/media/creator-logos-mobile.png": "/static/media/creator-logos-mobile.9d4663e77766d535e432.png",
+    "static/media/card-defranco.webp": "/static/media/card-defranco.0654f4f093b310218422.webp",
+    "static/media/card-baker.webp": "/static/media/card-baker.2188893b5e52f49293f3.webp",
+    "static/media/card-scotty.webp": "/static/media/card-scotty.2194334418ab6b363456.webp",
+    "static/media/creator-logos-mobile.webp": "/static/media/creator-logos-mobile.7132d7a1db4dc73b8385.webp",
+    "index.html": "/index.html",
+    "main.4cb5f7de.css.map": "/static/css/main.4cb5f7de.css.map",
+    "main.e7e2a61a.js.map": "/static/js/main.e7e2a61a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4cb5f7de.css",
+    "static/js/main.e7e2a61a.js"
+  ]
+}

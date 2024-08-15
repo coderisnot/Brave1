@@ -1,0 +1,31 @@
+twitch_new_details:
+  auth_user_id: "abc123"
+  auth_provider: "twitch"
+  twitch_channel_id: "323541525412313421"
+  name: "twtwtw"
+  display_name: "TwTwTw"
+  thumbnail_url: "https://some_image_host.com/some_image.png"
+
+twitch_verified_details:
+  auth_user_id: "abc123"
+  auth_provider: "twitch"
+  twitch_channel_id: "78032"
+  name: "twtwtw2"
+  display_name: "TwTwTw2"
+  thumbnail_url: "https://some_image_host.com/some_image.png"
+  stats:
+    :view_count: 400
+    :followers_count: 400
+
+<% ["details", "blocked", "restricted_member", "reauthorize"].each do |item| %>
+uphold_connected_twitch_<%= item %>:
+  auth_user_id: "<%= item %>"
+  auth_provider: "twitch"
+  twitch_channel_id: "78033"
+  name: "<%= item %>"
+  display_name: "UCTW"
+  thumbnail_url: "https://some_image_host.com/some_image.png"
+  stats:
+    :view_count: 40000
+    :followers_count: 40000
+<% end %>

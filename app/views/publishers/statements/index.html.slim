@@ -1,0 +1,21 @@
+noscript
+  div.noscript-warning = t "publishers.home.noscript"
+
+- content_for(:navbar_content_right) do
+  = link_to( \
+    t("shared.dashboard"), \
+    home_publishers_path, \
+    class: 'title' \
+  )
+  = render partial: "choose_channel_button"
+
+.container.p-4.bg-white.shadow.rounded
+  - if @cannot_read_uphold_transactions
+    .alert.alert-warning.d-flex.mb-4.align-items-center
+      .p-2= render 'icon_circled_bang_warning'
+      .p-2
+        = t('publishers.statements.index.missing_scope')
+        = link_to(I18n.t('publishers.statements.index.reauthorize'), connection_uphold_connection_path, method: :patch)
+
+  .statements
+=append_javascript_pack_tag('Statements')

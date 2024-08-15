@@ -1,0 +1,78 @@
+version: '3'
+
+services:
+  web: &web_base
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    image: publishers:latest
+    environment:
+      RAILS_ENV: development
+      REDIS_URL: redis://redis:6379/0
+      DATABASE_URL: postgres://postgres@postgres:5432/brave_publishers_dev
+      CREATORS_FULL_HOST: https://localhost
+      DATABASE_URL_TEST: postgres://postgres@postgres:5432/brave_publishers_test
+      ADDRESS: "0.0.0.0"
+      SENDGRID_SMTP_SERVER: mailcatcher
+      DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL: "true"
+    command: sh -c "rm -f tmp/pids/server.pid && ./scripts/entrypoint.sh && bundle exec rails s"
+    networks:
+      - default
+    depends_on:
+      - postgres
+      - redis
+    volumes:
+      - .:/var/www
+      - /var/www/node_modules
+    ports:
+      - "3000:3000"
+    env_file: .env.docker.dev
+  next:
+    build: nextjs/.
+    command: npm run dev
+    volumes:
+      - /app/node_modules # <-- try adding this!
+      - type: bind
+        source: ./nextjs
+        target: /app
+      - ./ssl:/ssl
+    ports:
+      - "443:5001"
+      - "5001:5001"
+      - "9231:9231" # debugger ports
+      - "9232:9232"
+      - "9229:9229"
+      - "9230:9230"
+    environment:
+      NODE_ENV: development
+      PUBLISHERS_HOST: web:3000
+      NEXT_HOST: localhost
+    depends_on:
+      - web
+    networks:
+      - default
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
+    volumes:
+      - "db-data:/var/lib/postgresql/data:rw"
+
+  mailcatcher:
+    image: "schickling/mailcatcher"
+    ports:
+      - 1025:1025
+      - 1080:1080
+
+  redis:
+    image: redis:alpine
+
+  sidekiq:
+    <<: *web_base
+    command: bundle exec sidekiq
+    ports: []
+    depends_on:
+      - web
+volumes:
+  db-data:
+

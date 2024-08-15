@@ -1,0 +1,23 @@
+- content_for(:title) do
+  h3= t("promo_mailer.promo_activated_2018q1_verified.subject")
+
+p.salutation= t("publisher_mailer.shared.salutation", name: @publisher.name)
+
+p = t("promo_mailer.promo_activated_2018q1_verified.body_one_html")
+
+.promo--referral-link-container
+  - @promo_enabled_channels.each do |channel|
+    
+    .promo--referral-title = on_channel_type(channel)
+
+    .promo--referral-link = link_to(https_referral_url(channel.promo_registration.referral_code), https_referral_url(channel.promo_registration.referral_code))
+    
+    .promo-share-container
+      = link_to(t("promo.shared.tweet"), tweet_url(channel.promo_registration.referral_code), target: :_blank, class: 'promo--share-button twitter')
+    
+      = link_to(t("promo.shared.share"), facebook_url(channel.promo_registration.referral_code), target: :_blank, class: 'promo--share-button facebook')
+
+.notice
+  p= t("promo.shared.tos_2_html")
+  p= t("shared.support_note_html")
+

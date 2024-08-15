@@ -1,0 +1,30 @@
+= content_for :site_channel_progress
+  = render partial: 'progress', locals: { \
+    progress: {info: 0, verify: 100, instruction: 0}, \
+    publisher: current_publisher \
+  }
+
+.single-panel--wrapper.single-panel--wrapper--large
+  = render "panel_flash_messages"
+  .single-panel--content
+    .single-panel--padded-content
+      h3.single-panel--headline= t ".heading"
+
+      .col-medium-centered.text-left
+        .two-options--wrapper
+          .two-options--option-a
+            h4.two-options--option-a-header= t ".trusted_file.heading"
+            .two-options--subheader.two-options--subheader--recommended= t ".trusted_file.subheading"
+            .two-options--image-wrapper
+              = image_tag("choose-file@2x.png", class: "two-options--image", width: 234, height: 137)
+            div= link_to(t(".trusted_file.button"), verification_public_file_site_channel_path(current_channel), class: "btn btn-block btn-primary")
+
+          .two-options--or
+            = t ".or"
+
+          .two-options--option-b
+            h4.two-options--option-b-header= t ".dns.heading"
+            .two-options--subheader= t ".dns.subheading"
+            .two-options--image-wrapper
+              = image_tag("choose-dns@2x.png", class: "two-options--image", width: 253, height: 96)
+            div= link_to(t(".dns.button"), verification_dns_record_site_channel_path(current_channel), class: "btn btn-block btn-outline-primary")

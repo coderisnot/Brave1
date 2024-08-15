@@ -1,0 +1,5 @@
+
+default:
+  publisher: publishers(:default)
+  date: "2019-01-01"
+

@@ -1,0 +1,6 @@
+h2 #{t(".heading")} #{@status}: #{Rack::Utils::HTTP_STATUS_CODES[@status]} 🤔
+p
+  = t ".body"
+  = " "
+  = link_to(root_url, root_path)
+p= t ".contact", support_email: Rails.configuration.pub_secrets[:support_email]

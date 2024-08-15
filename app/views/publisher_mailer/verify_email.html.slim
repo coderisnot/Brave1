@@ -1,0 +1,11 @@
+/ Sent as soon as a publisher fills out the first step.
+- content_for(:title) do
+  h3= t ".subject"
+
+p.salutation= t "publisher_mailer.shared.salutation", name: name_from_email(@publisher.pending_email)
+
+p= t ".body_html"
+
+div.btn-container= link_to(t(".button"), @private_reauth_url, class: "btn-primary btn-login")
+
+.notice= t "shared.warning_note_html"

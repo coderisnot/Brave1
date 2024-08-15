@@ -1,0 +1,15 @@
+= content_for :nav do
+  nav.navbar.navbar-default.navbar-static-top.top-nav-collapse
+    .container-fluid
+      .menu-container
+        .nav.pull-right.float-right
+          = link_to(t("shared.cancel"), home_publishers_path, class: 'btn btn-secondary btn-outline-primary')
+
+.single-panel--wrapper
+  .single-panel--content
+    .single-panel--padded-content
+
+      h3.single-panel--headline= t "shared.add_channel"
+      p= t ".intro"
+
+      = render "choose_channel_type"

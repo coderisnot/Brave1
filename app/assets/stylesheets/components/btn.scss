@@ -1,0 +1,84 @@
+.btn-link-primary {
+  // Modified version of .btn-link: https://git.io/vNHmB
+  font-weight: $font-weight-normal;
+  color: $primary;
+  background-color: transparent;
+
+  @include hover {
+    color: $primary;
+    text-decoration: none;
+    background-color: transparent;
+    border-color: transparent;
+  }
+
+  &:focus,
+  &.focus {
+    text-decoration: $primary;
+    border-color: transparent;
+    box-shadow: none;
+  }
+
+  &:disabled,
+  &.disabled {
+    color: $btn-link-disabled-color;
+  }
+
+  // No need for an active state here
+}
+
+.btn-default {
+  color: $braveGray-1;
+  background: $braveGray-10;
+  border: 1px solid $braveGray-7;
+}
+
+.btn--wrapper--with-icon {
+  display: flex;
+  align-items: center;
+
+  > * {
+    margin-right: $spacer;
+  }
+}
+
+.btn-wide {
+  min-width: $spacer * 10;
+}
+
+.btn-primary,
+.btn-secondary,
+.btn-danger,
+.btn-outline-primary {
+  padding: 10px 24px;
+  letter-spacing: 0.02em;
+  font-size: 14px;
+  border-radius: 20px;
+}
+
+.btn-secondary {
+  background: white;
+  border: 1px solid;
+  box-shadow: 2px 2px 100px rgba(255, 255, 255, 0.5);
+  color: $braveBrand;
+  font-weight: 400;
+
+  &:hover {
+    color: white;
+    border: 1px solid #aaa;
+  }
+
+  &:active {
+    color: #8f9397;
+  }
+}
+
+.btn-highlight {
+  border-color: $braveBrand;
+  color: $braveBrand;
+
+  &:hover {
+    background: white;
+    border-color: $braveBrand;
+    color: $braveBrand;
+  }
+}

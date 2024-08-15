@@ -1,0 +1,10 @@
+- content_for(:title) do
+  h3= t ".title"
+
+p.salutation= t "publisher_mailer.shared.salutation", name: @publisher.name
+
+p= t ".intro_html"
+
+div.btn-container= link_to(t(".button"), @private_reauth_url, class: "btn-primary btn-login")
+
+.notice= t "shared.warning_note_html"

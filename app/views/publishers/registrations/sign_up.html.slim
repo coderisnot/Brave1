@@ -1,0 +1,24 @@
+.single-panel--wrapper
+  = render "panel_flash_messages"
+  .single-panel--content
+    .single-panel--padded-content
+
+      h3.single-panel--headline= t ".heading"
+
+      .col-small-centered
+        = form_tag registrations_path, method: :post do |f|
+          .form-group
+            = email_field_tag :email, nil, autofocus: true, class: "form-control", placeholder: t("publishers.shared.enter_email"), required: true, value: @publisher.email
+          - if params[:captcha]
+            = hidden_field_tag :captcha
+          - if @should_throttle
+            .form-group
+              = recaptcha_tags
+          label
+            = check_box_tag :terms_of_service, require: true
+            span.pl-2= t('.terms_of_service')
+          = submit_tag t("shared.get_started"), class: "btn btn-block btn-primary"
+
+      .single-panel--footer.single-panel--footer--secondary
+        ' #{t("shared.existing_account")}
+        = link_to t("shared.log_in"), log_in_publishers_path

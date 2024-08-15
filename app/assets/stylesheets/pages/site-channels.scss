@@ -1,0 +1,75 @@
+.site-channels--body-list {
+  margin-left: -40px;
+  margin-bottom: $spacer*3;
+  @include media-breakpoint-down(xs) {
+    margin-left: -20px;
+  }
+
+  li {
+    margin-bottom: $spacer*2;
+  }
+}
+
+.site-channels--https-check {
+  margin-left: -22px;
+  margin-bottom: $spacer*2;
+  @include media-breakpoint-down(xs) {
+    margin-left: 0;
+  }
+
+  img {
+    margin-top: -1px;
+    margin-right: $spacer*0.5;
+  }
+}
+
+.site-channels--padded-group {
+  margin: $spacer*2 0;
+}
+
+.site-channels--finish-later {
+  padding-left: 40px;
+  color: $braveBrand;
+  &:hover,
+  &:focus {
+    color: $braveBrand-Dark;
+    text-decoration: none;
+  }
+}
+
+.learn-more {
+  margin-top: 4px;
+  font-weight: bold;
+  font-size: 14px;
+  #label {
+    margin-left: 5px;
+  }
+  &.extended {
+    margin-left: 10px;
+  }
+}
+
+#site-channel-ads-learn-more-button {
+  margin-left: 3px;
+}
+
+#wordpress_escape_hatch {
+  opacity: .7;
+  font-size: 12px;
+  margin-top: -25px;
+}
+
+#verification_failed_modal {
+  text-align: center;
+  #icn-warning {
+    padding: 20px;
+  }
+
+  .icon-circled-x {
+    width: 84px;
+    height: 84px;
+  }
+  h4 {
+    margin-top: 20px;
+  }
+}

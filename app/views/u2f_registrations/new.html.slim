@@ -1,0 +1,78 @@
+.single-panel--wrapper
+
+  .error-group--wrapper.js-register-u2f-error
+
+    .js-u2f-error-bad-request
+      .single-panel--content.single-panel--content--alert.icon-and-text--wrapper
+        .icon-and-text--icon
+          = render 'icon_circled_x'
+        .icon-and-text--text
+          = t ".u2f-error.bad-request"
+
+    .js-u2f-error-configuration-unsupported
+      .single-panel--content.single-panel--content--alert.icon-and-text--wrapper
+        .icon-and-text--icon
+          = render 'icon_circled_x'
+        .icon-and-text--text
+          = t ".u2f-error.configuration-unsupported"
+
+    .js-u2f-error-device-ineligible
+      .single-panel--content.single-panel--content--alert.icon-and-text--wrapper
+        .icon-and-text--icon
+          = render 'icon_circled_x'
+        .icon-and-text--text
+          = t ".u2f-error.device-ineligible"
+
+    .js-u2f-error-other-error
+      .single-panel--content.single-panel--content--alert.icon-and-text--wrapper
+        .icon-and-text--icon
+          = render 'icon_circled_x'
+        .icon-and-text--text
+          = t ".u2f-error.other-error"
+
+    .js-u2f-error-timeout
+      .single-panel--content.single-panel--content--alert.icon-and-text--wrapper
+        .icon-and-text--icon
+          = render 'icon_circled_x'
+        .icon-and-text--text
+          = t ".u2f-error.timeout"
+
+    .js-u2f-error-implementation-incomplete
+      .single-panel--content.single-panel--content--alert.icon-and-text--wrapper
+        .icon-and-text--icon
+          = render 'icon_circled_x'
+        .icon-and-text--text
+          = t ".u2f-error.implementation-incomplete"
+
+    .error-group--no-error.js-no-error
+
+  .single-panel--content
+    .single-panel--padded-content
+
+      h3.single-panel--headline= t ".heading"
+
+      .col-small-centered.text-left
+
+        = form_for @u2f_registration, html: { class: "js-register-webauthn js-feature-u2f-available" } do |f|
+          input type="hidden" name="webauthn_challenge" value=(@webauthn_options.challenge)
+          input type="hidden" name="webauthn_user_display_name" value=(@webauthn_options.user.display_name)
+          input type="hidden" name="webauthn_user_id" value=(@webauthn_options.user.id)
+          input type="hidden" name="webauthn_exclusions" value=(@webauthn_options.exclude.to_json)
+          input type="hidden" name="webauthn_response"
+
+          .form-group
+            = f.label :name
+            = f.text_field :name, class: "form-control", placeholder: t(".name_placeholder")
+
+          .col-halves
+            .col-half
+              = f.submit t(".submit_value"), class: "btn btn-primary"
+            .col-half.text-right
+              = link_to t("shared.cancel"), security_publishers_path, class: "btn btn-link"
+
+          .mt-3.js-u2f-is-working
+            h5= t ".waiting_heading"
+            p= t ".waiting_description"
+
+        .warning.js-feature-u2f-unavailable
+          p.alert.alert-warning = t ".u2f-unavailable"

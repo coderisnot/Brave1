@@ -1,0 +1,19 @@
+/ Sent as soon as a publisher fills out the first step.
+- content_for(:title) do
+  h3= t ".title"
+
+p.salutation= t "publisher_mailer.shared.salutation", name: @publisher.name || name_from_email(@publisher.email)
+
+p= "#{t(".intro")}"
+
+p
+  div
+    strong.attribute= "#{t("publisher_mailer.shared.previous_email")}:"
+    = @publisher.email
+  div
+    strong.attribute= "#{t("publisher_mailer.shared.updated_email")}:"
+    = @publisher.pending_email
+
+p= t(".contact_support_html")
+
+.notice= t "shared.support_note_html"

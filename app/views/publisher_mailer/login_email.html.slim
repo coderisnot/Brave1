@@ -1,0 +1,13 @@
+/ Sent when user requests a login link via Publishers #create_auth_token
+- content_for(:title) do
+  h3= t ".subject"
+
+p.salutation= t "publisher_mailer.shared.salutation", name: @publisher.name || name_from_email(@publisher.email)
+
+p= t ".body_html"
+
+div.btn-container= link_to(t(".button"), @private_reauth_url, class: "btn-primary btn-login")
+
+.notice
+  p= t ".explicit_url", url: @private_reauth_url
+  p= t "shared.warning_note_html"

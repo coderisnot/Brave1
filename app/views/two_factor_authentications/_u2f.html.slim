@@ -1,0 +1,41 @@
+div.js-feature-u2f-available
+  = form_tag u2f_authentications_path, class: "js-authenticate-u2f" do
+    input type="hidden" name="webauthn_u2f_app_id" value=(webauthn_get_options.extensions[:appid])
+    input type="hidden" name="webauthn_u2f_challenge" value=(webauthn_get_options.challenge)
+    input type="hidden" name="webauthn_u2f_sign_requests" value=(webauthn_get_options.allow.to_json)
+    input type="hidden" name="webauthn_u2f_response"
+    h3.single-panel--headline = t ".heading"
+
+    .col-small-centered
+      .js-u2f-is-working
+        p = t ".body"
+        = render "application/usb_with_lines"
+
+    .col-small-centered
+      .js-u2f-is-prompting
+        p = render "application/usb"
+        p.two-factor-authentication--retry = submit_tag t(".submit_value"), class: "btn btn-primary btn-block"
+
+  - if @totp_enabled
+    .col-small-centered
+      p.two-factor-authentication--alternative-prompt
+        = t(".totp_alternative_available")
+        br
+        = link_to t(".totp_alternative_link"), two_factor_authentications_path(request_totp: true)
+
+div.js-feature-u2f-unavailable
+
+  - if @totp_enabled
+    h3.single-panel--headline = t ".heading"
+
+    .col-small-centered
+        p = render "application/usb"
+        hr.two-factor-authentication--alternative-hr
+        p
+          = link_to t(".u2f_unavailable_totp_alternative_link"), two_factor_authentications_path(request_totp: true), class: 'btn btn-primary btn-wide'
+
+  - else
+    h3.single-panel--headline = t ".heading"
+    .col-small-centered
+      p = t ".body"
+      p = render "application/usb"

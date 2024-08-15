@@ -1,0 +1,218 @@
+@import url("@brave/leo/tokens/css/variables.css");
+@import url("./variables.css");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .border-primary {
+    @apply border border-gray-20
+  }
+}
+
+html {
+  box-sizing: border-box;
+  font-family: var(--font-poppins), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: var(--leo-typography-primary-default-regular-font-size);
+
+  -webkit-font-smoothing: antialiased;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+body {
+  color: var(--leo-color-text-primary);
+  background: var(--leo-color-container-background);
+  font: var(--leo-font-default-regular);
+}
+
+body, h1, h2, h3, h4, h5, h6, p, ol, ul {
+  margin: 0;
+  padding: 0;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1 {
+  font: var(--leo-font-primary-heading-h1);
+}
+
+h2 {
+  font: var(--leo-font-primary-heading-h2);
+}
+
+h3 {
+  font: var(--leo-font-primary-heading-h3);
+}
+
+h4 {
+  font: var(--leo-font-primary-heading-h4);
+}
+
+hr {
+  @apply my-2;
+
+  margin-top: var(--leo-spacing-16);
+  margin-bottom: var(--leo-spacing-16);
+
+  opacity: 0.4;
+  border: 0;
+  border-top: 1px solid var(--leo-color-text-primary);
+}
+
+h1.mobile {
+  font: var(--leo-font-mobile-heading-h1);
+}
+
+h2.mobile {
+  font: var(--leo-font-mobile-heading-h2);
+}
+
+h3.mobile {
+  font: var(--leo-font-mobile-heading-h3);
+}
+
+h4.mobile {
+  font: var(--leo-font-mobile-heading-h4);
+}
+
+.small-regular {
+  font: var(--leo-font-small-regular);
+}
+
+.small-semibold {
+  font: var(--leo-font-small-semibold);
+}
+
+.color-tertiary {
+  color: var(--leo-color-text-tertiary);
+}
+
+.color-interactive {
+  color: var(--leo-color-icon-interactive);
+}
+
+.color-secondary {
+  color: var(--leo-color-text-secondary);
+}
+
+.color-subtle {
+  color: var(--leo-color-divider-subtle);
+}
+
+.label-component {
+  color: var(--leo-color-text-secondary);
+  line-height: var(--leo-typography-components-label-line-height);
+  letter-spacing: var(--leo-typography-components-label-letter-spacing);
+  font-weight: var(--leo-typography-components-label-font-weight);
+  font-size: var(--leo-typography-components-label-font-size);
+}
+
+.info-text {
+  color: var(--leo-color-systemfeedback-info-text);
+  background-color: var(--leo-color-systemfeedback-info-background);
+  border-radius: var(--leo-radius-m);
+  padding: var(--leo-spacing-xl);
+}
+
+.error-pill {
+  background-color: var(--leo-color-red-40);
+  border-radius: var(--leo-radius-s);
+  line-height: var(--leo-typography-components-label-line-height);
+  letter-spacing: var(--leo-typography-components-label-letter-spacing);
+  font-weight: var(--leo-typography-components-label-font-weight);
+  font-size: var(--leo-typography-components-label-font-size);
+  color: var(--leo-color-white);
+  padding: var(--leo-spacing-s);
+}
+
+.error-text {
+  background-color: var(--leo-color-systemfeedback-error-background);
+  color: var(--leo-color-systemfeedback-error-icon);
+  border-radius: var(--leo-radius-m);
+  padding: var(--leo-spacing-2xl);
+}
+
+[slot='errors'] {
+  display: flex;
+  flex-direction: row;
+  gap: var(--leo-spacing-m);
+  align-items: center;
+
+  margin-top: var(--leo-spacing-s);
+
+  color: var(--leo-color-systemfeedback-error-icon);
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+
+  height: 100%;
+  min-height: calc(100vh - 80px);
+
+  width: 100%;
+}
+
+.content-background {
+  background: var(--leo-color-page-background);
+  padding: var(--leo-spacing-4xl);
+  width: 100%;
+  border-radius: var(--leo-radius-xl) var(--leo-radius-m) var(--leo-radius-m) var(--leo-radius-xl);
+}
+
+@media (width <= 768px) {
+  .content-background, .main {
+    padding: 5px;
+    background: var(--leo-color-container-background);
+  }
+}
+
+.content-width {
+  width: 800px;
+}
+
+.content-width-sm {
+  width: 650px;
+}
+
+.animate-dash {
+  animation: dash 1.5s ease-in-out infinite;
+}
+
+.shadow {
+  box-shadow: 0 1px 4px 0 rgb(0 0 0 / 10%), 0 1px 0 0 rgb(0 0 0 / 5%);
+}
+
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1, 150;
+    stroke-dashoffset: 0;
+  }
+
+  50% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -35;
+  }
+
+  100% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -124;
+  }
+}
