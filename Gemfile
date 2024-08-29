@@ -231,7 +231,7 @@ group :development, :test do
   gem "minitest-rails", "~> 7.1.0"
   gem "mocha", require: false
   gem "simplecov", require: false, group: :test
-  gem "selenium-webdriver", "~> 4.4"
+  gem "selenium-webdriver", "~> 4.24", ">= 4.24.0"
   gem "solargraph"
   gem "dotenv-rails", "3.1.0"
 end
