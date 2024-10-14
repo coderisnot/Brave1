@@ -215,7 +215,7 @@ group :development, :test do
   gem "pry-byebug"
 
   # Code formatting
-  gem "standard"
+  gem "standard", ">= 1.41.0"
 
   # Get rid of mailcatcher
   gem "letter_opener"
