@@ -116,7 +116,7 @@ gem "redis-session-store"
 gem "render_async", "~> 2.1"
 
 # For ruby 3
-gem "rexml"
+gem "rexml", ">= 3.3.9"
 
 # Generate QR codes for TOTP 2fa
 gem "rqrcode", "~> 2.2.0"
@@ -215,7 +215,7 @@ group :development, :test do
   gem "pry-byebug"
 
   # Code formatting
-  gem "standard"
+  gem "standard", ">= 1.41.0"
 
   # Get rid of mailcatcher
   gem "letter_opener"
