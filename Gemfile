@@ -104,7 +104,7 @@ gem "puma", "~> 6.4.2"
 # Sanitize bad inputs coming in
 gem "rack-utf8_sanitizer"
 
-gem "rails-i18n", "~> 7.0"
+gem "rails-i18n", "~> 8.0", ">= 8.0.0"
 
 # I love captchas
 gem "recaptcha", "~> 5.16.0", require: "recaptcha/rails"
