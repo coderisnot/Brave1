@@ -228,7 +228,7 @@ group :development, :test do
   gem "capybara"
   gem "minitest"
   gem "minitest-retry"
-  gem "minitest-rails", "~> 7.1.0"
+  gem "minitest-rails", "~> 8.0.0"
   gem "mocha", require: false
   gem "simplecov", require: false, group: :test
   gem "selenium-webdriver", "~> 4.4"
