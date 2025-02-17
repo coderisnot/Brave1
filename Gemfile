@@ -5,11 +5,11 @@ ruby "~> 3.3.1"
 source "https://rubygems.org"
 
 rails_version = "7.1.3.4"
-gem "rails", rails_version
+gem "rails", ">= 7.2.0", rails_version
 gem "rails-html-sanitizer", "1.6.0"
 gem "railties", rails_version
 
-gem "rack", "3.0.9.1"
+gem "rack", "3.0.12"
 
 # All things countries
 gem "countries"
@@ -31,7 +31,7 @@ gem "activerecord-postgres_enum"
 # Use AWS gem for s3 uploads
 gem "aws-sdk-s3", "~> 1.143.0"
 
-gem "bootstrap", "4.6.2"
+gem "bootstrap", "4.6.2.1"
 
 gem "brotli", "~> 0.5.0"
 
